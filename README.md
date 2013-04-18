@@ -1,7 +1,10 @@
 PlayView
 ========
 
-A Simple and Beautiful PlayStore 4.0 like Listview Implementation
+A Simple and Beautiful PlayStore 4.0 like Listview Implementation.
+This is just a intial step towards developing something great.
+
+Android 2.2 and UP.
 
 ![Example Image][1]
 
@@ -9,14 +12,14 @@ A Simple and Beautiful PlayStore 4.0 like Listview Implementation
 Developed By
 ============
 
-* Aradh Pillai- <aradhpillai@gmail.com>
+* Aradh Pillai a.k.a GadgetCheck- <aradhpillai@gmail.com>
 
 
 
 License
 =======
 
-    Copyright 2012 Aradh Pillai
+    Copyright 2013 Aradh Pillai
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -34,4 +37,4 @@ License
 
 
 
- [1]: http://img.tapatalk.com/d/13/04/12/byte5ave.jpg
+ [1]: http://s16.postimg.org/sbnt4lbs5/2013_04_18_19_18_39.png
