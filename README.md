@@ -12,8 +12,7 @@ Android 2.2 and UP.
 Developed By
 ============
 
-* Aradh Pillai a.k.a GadgetCheck- <aradhpillai@gmail.com>
-
+* Aradh Pillai 
 
 
 License
