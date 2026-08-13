@@ -21,11 +21,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.simrge.playview.data.AppItem
 import com.simrge.playview.data.Catalog
 import com.simrge.playview.data.Hero
 import com.simrge.playview.ui.components.AppIcon
@@ -58,16 +60,16 @@ fun HomeScreen(
                     .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                Catalog.heroes.forEach { hero ->
-                    HeroCard(hero = hero, onClick = { onAppClick(hero.appId) })
+                Catalog.homeHeroes.forEach { (hero, app) ->
+                    HeroCard(hero = hero, app = app, onClick = { onAppClick(app.id) })
                 }
             }
         }
-        items(Catalog.shelves, key = { it.id }, contentType = { "shelf" }) { shelf ->
+        items(Catalog.homeShelves, key = { it.first.id }, contentType = { "shelf" }) { (shelf, apps) ->
             AppShelf(
                 title = shelf.title,
                 subtitle = shelf.subtitle,
-                apps = Catalog.shelfApps(shelf),
+                apps = apps,
                 onAppClick = onAppClick,
             )
         }
@@ -75,9 +77,9 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HeroCard(hero: Hero, onClick: () -> Unit) {
-    val app = Catalog.app(hero.appId) ?: return
-    val accent = Color(app.accent)
+private fun HeroCard(hero: Hero, app: AppItem, onClick: () -> Unit) {
+    val accent = remember(app.accent) { Color(app.accent) }
+    val brush = remember(accent) { Brush.linearGradient(listOf(accent, accent.copy(alpha = 0.65f))) }
     Column(
         Modifier
             .width(280.dp)
@@ -87,10 +89,7 @@ private fun HeroCard(hero: Hero, onClick: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(168.dp)
-                .background(
-                    Brush.linearGradient(listOf(accent, accent.copy(alpha = 0.65f))),
-                    RoundedCornerShape(28.dp),
-                ),
+                .background(brush, RoundedCornerShape(28.dp)),
             contentAlignment = Alignment.BottomStart,
         ) {
             AppIcon(

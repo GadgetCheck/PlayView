@@ -96,35 +96,36 @@ fun PlayViewApp() {
                 }
             }
             Box(Modifier.weight(1f).fillMaxWidth()) {
-                if (!searching) {
-                    when (tab) {
-                        Tab.Home -> HomeScreen(onAppClick = { appId = it })
-                        Tab.Charts -> ChartsScreen(onAppClick = { appId = it })
-                        Tab.Categories -> {
-                            val selectedCategory = categoryId
-                            val category = selectedCategory?.let(Catalog::category)
-                            if (category == null) {
-                                CategoriesScreen(onCategoryClick = { categoryId = it })
-                            } else {
-                                ChartsScreen(
-                                    onAppClick = { appId = it },
-                                    title = category.name,
-                                    subtitle = category.description,
-                                    apps = remember(selectedCategory) { Catalog.appsIn(selectedCategory) },
-                                )
-                            }
+                when (tab) {
+                    Tab.Home -> HomeScreen(onAppClick = { appId = it })
+                    Tab.Charts -> ChartsScreen(onAppClick = { appId = it })
+                    Tab.Categories -> {
+                        val selectedCategory = categoryId
+                        val category = selectedCategory?.let(Catalog::category)
+                        if (category == null) {
+                            CategoriesScreen(onCategoryClick = { categoryId = it })
+                        } else {
+                            ChartsScreen(
+                                onAppClick = { appId = it },
+                                title = category.name,
+                                subtitle = category.description,
+                                apps = remember(selectedCategory) { Catalog.appsIn(selectedCategory) },
+                            )
                         }
                     }
-                } else {
-                    SearchResults(
-                        query = query,
-                        results = remember(query) { Catalog.search(query) },
-                        onQueryChange = { query = it },
-                        onAppClick = { id ->
-                            searching = false
-                            appId = id
-                        },
-                    )
+                }
+                if (searching) {
+                    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                        SearchResults(
+                            query = query,
+                            results = remember(query) { Catalog.search(query) },
+                            onQueryChange = { query = it },
+                            onAppClick = { id ->
+                                searching = false
+                                appId = id
+                            },
+                        )
+                    }
                 }
                 val selected = appId
                 if (selected != null) {

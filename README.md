@@ -36,7 +36,7 @@ app/src/main/java/com/simrge/playview/
   ui/                 home, charts, categories, search, detail, theme
 ```
 
-There is no Navigation graph and no Material `Scaffold`. `PlayViewApp` keeps a few saved fields (`tab`, `appId`, `categoryId`, `query`). Detail draws on top of the current tab, so Back does not rebuild Home.
+There is no Navigation graph and no Material `Scaffold`. `PlayViewApp` keeps a few saved fields (`tab`, `appId`, `categoryId`, `query`). Search and detail draw on top of the current tab, so Back does not rebuild Home.
 
 Home and Charts are `LazyColumn`. Shelves are a `Row` with `horizontalScroll` — not a nested `LazyRow` — so Compose does not measure the whole store on every frame.
 
