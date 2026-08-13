@@ -135,6 +135,10 @@ object Catalog {
     private val appsById: Map<String, AppItem> = apps.associateBy { it.id }
     private val categoriesById: Map<String, Category> = categories.associateBy { it.id }
     private val appsByCategory: Map<String, List<AppItem>> = apps.groupBy { it.categoryId }
+    val homeHeroes: List<Pair<Hero, AppItem>> =
+        heroes.mapNotNull { hero -> app(hero.appId)?.let { hero to it } }
+    val homeShelves: List<Pair<Shelf, List<AppItem>>> =
+        shelves.map { shelf -> shelf to shelfApps(shelf) }
 
     fun app(id: String): AppItem? = appsById[id]
 

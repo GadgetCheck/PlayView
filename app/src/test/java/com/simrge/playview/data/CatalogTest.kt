@@ -47,6 +47,8 @@ class CatalogTest {
         Catalog.shelves.forEach { shelf ->
             assertEquals(shelf.appIds.size, Catalog.shelfApps(shelf).size)
         }
+        assertEquals(Catalog.heroes.size, Catalog.homeHeroes.size)
+        assertEquals(Catalog.shelves.size, Catalog.homeShelves.size)
     }
 
     @Test
